@@ -1,6 +1,7 @@
-﻿using NUnit.Framework;
+﻿using Kata;
+using NUnit.Framework;
 
-namespace Kata.Tests
+namespace KataTests
 {
     
     public class DuplicateStringTests
