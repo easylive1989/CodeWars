@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Kata
 {
-    public class NextSmallerKata
+    public static class NextSmallerKata
     {
         public static long NextSmaller(long number)
         {
@@ -14,13 +14,13 @@ namespace Kata
                 return -1;
             } 
 
-            digitArray = findSmaller(digitArray);
+            digitArray = FindSmaller(digitArray);
 
             if (digitArray[0] == 0)
             {
                 return -1;
             }
-            return getOutput(digitArray);
+            return GetOutput(digitArray);
         }
 
         private static bool IsSmallest(long[] digitArray)
@@ -29,7 +29,7 @@ namespace Kata
             return digitArray.SequenceEqual(sortedDigitArray);
         }
 
-        private static long[] findSmaller(long[] digitArray)
+        private static long[] FindSmaller(long[] digitArray)
         {
             var smallerDigit = new List<long>();
             
@@ -47,7 +47,7 @@ namespace Kata
             else
             {
                 smallerDigit.Add(firstDigit);
-                smallerDigit.AddRange(findSmaller(otherDigits));
+                smallerDigit.AddRange(FindSmaller(otherDigits));
             }
             return smallerDigit.ToArray();
         }
@@ -58,7 +58,7 @@ namespace Kata
             return Array.ConvertAll(number.ToString().ToArray(), x => (long)x - '0');
         }
 
-        private static long getOutput(long[] digitArray)
+        private static long GetOutput(long[] digitArray)
         {
             var total = 0L;
             for (int i = 0; i < digitArray.Length; i++)
