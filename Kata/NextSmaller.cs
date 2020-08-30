@@ -4,37 +4,37 @@ using System.Linq;
 
 namespace Kata
 {
-    public static class NextSmallerKata
+    public class NextSmallerKata
     {
-        public static long NextSmaller(long number)
+        public long NextSmaller(long number)
         {
-            long[] digitArray = ParseToDigitArray(number);
-            if (IsSmallest(digitArray))
+            var digits = ToDigits(number);
+            if (IsSmallest(digits))
             {
                 return -1;
             } 
 
-            digitArray = FindSmaller(digitArray);
+            digits = FindSmaller(digits);
 
-            if (digitArray[0] == 0)
+            if (digits[0] == 0)
             {
                 return -1;
             }
-            return GetOutput(digitArray);
+            return ToNumber(digits);
         }
 
-        private static bool IsSmallest(long[] digitArray)
+        private bool IsSmallest(List<long> digitArray)
         {
-            long[] sortedDigitArray = digitArray.OrderBy(i => i).ToArray();
-            return digitArray.SequenceEqual(sortedDigitArray);
+            var smallestDigits = digitArray.OrderBy(i => i);
+            return digitArray.SequenceEqual(smallestDigits);
         }
 
-        private static long[] FindSmaller(long[] digitArray)
+        private List<long> FindSmaller(List<long> digitArray)
         {
             var smallerDigit = new List<long>();
             
             var firstDigit = digitArray[0];
-            var otherDigits = digitArray.Skip(1).ToArray();
+            var otherDigits = digitArray.Skip(1).ToList();
             if (IsSmallest(otherDigits))
             {
                 var sortedDigits = digitArray.OrderByDescending(i => i).ToList();
@@ -49,23 +49,18 @@ namespace Kata
                 smallerDigit.Add(firstDigit);
                 smallerDigit.AddRange(FindSmaller(otherDigits));
             }
-            return smallerDigit.ToArray();
+            return smallerDigit.ToList();
         }
     
 
-        private static long[] ParseToDigitArray(long number)
+        private List<long> ToDigits(long number)
         {
-            return Array.ConvertAll(number.ToString().ToArray(), x => (long)x - '0');
+            return number.ToString().Select(x => (long) x - '0').ToList();
         }
 
-        private static long GetOutput(long[] digitArray)
+        private long ToNumber(List<long> digitArray)
         {
-            var total = 0L;
-            for (int i = 0; i < digitArray.Length; i++)
-            {
-                total = 10 * total + digitArray[i];
-            }
-            return total;
+            return digitArray.Aggregate(0L, (total, number) => 10 * total + number);
         }
         
     }

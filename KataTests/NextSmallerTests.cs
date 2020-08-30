@@ -50,7 +50,7 @@ namespace KataTests
 
         private void NextSmallerShouldBe(int input, int expected)
         {
-            var result = NextSmallerKata.NextSmaller(input);
+            var result = new NextSmallerKata().NextSmaller(input);
             Assert.AreEqual(expected, result);
         }
     }
