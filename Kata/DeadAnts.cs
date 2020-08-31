@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace Kata
 {
+    // https://www.codewars.com/kata/57d5e850bfcdc545870000b7
+    // 6 kyu
     public class DeadAnts
     {
-        public static int DeadAntCount(string ants)
+        public int DeadAntCount(string ants)
         {
             if(ants != null)
             {
-                return findDeadAntCount(ants);
+                return FindDeadAntCount(ants);
             }
             else
             {
@@ -21,13 +23,13 @@ namespace Kata
             }
         }
 
-        private static int findDeadAntCount(String ants)
+        private int FindDeadAntCount(String ants)
         {
-            String deadAntsCollections = findDeadAntsCollections(ants);
-            return calculateDeadAntCount(deadAntsCollections);
+            String deadAntsCollections = FindDeadAntsCollections(ants);
+            return CalculateDeadAntCount(deadAntsCollections);
         }
 
-        private static string findDeadAntsCollections(string ants)
+        private string FindDeadAntsCollections(string ants)
         {
             string pattern = "ant|[^ant]";
             string replacement = "";
@@ -35,7 +37,7 @@ namespace Kata
             return rgx.Replace(ants, replacement);
         }
 
-        private static int calculateDeadAntCount(String deadAntsCollections)
+        private int CalculateDeadAntCount(String deadAntsCollections)
         {
             int antHeadCount = 0, antBodyCount = 0, antLegCount = 0;
             foreach(char partOfAnt in deadAntsCollections.ToCharArray())

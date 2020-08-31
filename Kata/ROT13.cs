@@ -5,7 +5,7 @@ namespace Kata
     public class ROT13
     {
         
-        public static string Rot13(string input)
+        public string Rot13(string input)
         {
             var characters = input.ToCharArray();
             for (int idx = 0; idx < characters.Length ; idx++ )
@@ -15,7 +15,7 @@ namespace Kata
             return new String(characters);
         }
 
-        private static char Rotate(char character, int distance)
+        private char Rotate(char character, int distance)
         {
             if (character >= 65 && character <= 90)
             {

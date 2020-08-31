@@ -10,7 +10,7 @@ namespace KataTests
         public void Rot13Test()
         {
             
-            Assert.AreEqual("nNM13 example.", ROT13.Rot13("aAZ13 rknzcyr."));
+            Assert.AreEqual("nNM13 example.", new ROT13().Rot13("aAZ13 rknzcyr."));
         }
     }
 }

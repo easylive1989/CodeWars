@@ -3,7 +3,8 @@ using System.Linq;
 
 namespace Kata
 {
-    //https://www.codewars.com/kata/555624b601231dc7a400017a/train/csharp
+    // https://www.codewars.com/kata/555624b601231dc7a400017a/train/csharp
+    // 5 kyu
     public class JosephusSurvivor
     {
         public int Play(int count, int step)

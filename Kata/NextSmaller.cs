@@ -4,6 +4,8 @@ using System.Linq;
 
 namespace Kata
 {
+    // https://www.codewars.com/kata/5659c6d896bc135c4c00021e
+    // 4 kyu
     public class NextSmallerKata
     {
         public long NextSmaller(long number)

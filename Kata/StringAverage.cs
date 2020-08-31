@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Kata
 {
+    // https://www.codewars.com/kata/5966847f4025872c7d00015b
+    // 6 kyu
     public class StringAverage
     {
 
         private const int INVALID_NUMBER = -1;
         private const string INVALID_STRING_NUMBER = "n/a";
 
-        public static string AverageString(string str)
+        public string AverageString(string str)
         {
             if (str != null)
             {
@@ -24,7 +26,7 @@ namespace Kata
             }
         }
 
-        private static string DoAveragString(string str)
+        private string DoAveragString(string str)
         {
             string[] strNums = ToStringNumbers(str);
             int[] nums = ToNumbers(strNums);
@@ -40,12 +42,12 @@ namespace Kata
             }
         }
 
-        private static string[] ToStringNumbers(string str)
+        private string[] ToStringNumbers(string str)
         {
             return str.Split(' ');
         }
 
-        private static int[] ToNumbers(string[] strNumbers)
+        private int[] ToNumbers(string[] strNumbers)
         {
             int[] numbers = new int[strNumbers.Length];
             for (int i = 0; i < strNumbers.Length; i++)
@@ -55,7 +57,7 @@ namespace Kata
             return numbers;
         }
 
-        private static Boolean ContainsInvalidNumber(int[] numbers)
+        private Boolean ContainsInvalidNumber(int[] numbers)
         {
             foreach (int number in numbers)
             {
@@ -65,7 +67,7 @@ namespace Kata
             return false;
         }
 
-        private static int CalculateAverage(int[] numbers)
+        private int CalculateAverage(int[] numbers)
         {
             int sum = 0;
             foreach (int number in numbers)
@@ -75,7 +77,7 @@ namespace Kata
             return sum / numbers.Length;
         }
 
-        private static int ToNumber(string strNumber)
+        private int ToNumber(string strNumber)
         {
             if (strNumber.Equals("zero"))
             {
@@ -123,7 +125,7 @@ namespace Kata
             }
         }
 
-        private static String ToString(int number)
+        private String ToString(int number)
         {
             if (number == 0)
             {

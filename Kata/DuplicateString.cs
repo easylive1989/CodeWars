@@ -3,9 +3,11 @@ using System.Collections.Generic;
 
 namespace Kata
 {
+    // https://www.codewars.com/kata/54bf1c2cd5b56cc47f0007a1
+    // 6 kyu
     public class DuplicateString
     {
-        public static int DuplicateCount(string str)
+        public int DuplicateCount(string str)
         {
             if (!String.IsNullOrEmpty(str))
             {
@@ -18,13 +20,13 @@ namespace Kata
             }
         }
 
-        private static int CalculateDuplicateCount(string input)
+        private int CalculateDuplicateCount(string input)
         {
             Dictionary<char, int> charCount = GenerateCharCount(input);
             return CalculateDuplicateCount(charCount);
         }
 
-        private static Dictionary<char, int> GenerateCharCount(string input)
+        private Dictionary<char, int> GenerateCharCount(string input)
         {
             Dictionary<char, int> count = new Dictionary<char, int>();
             foreach (char character in input.ToCharArray())
@@ -41,7 +43,7 @@ namespace Kata
             return count;
         }
 
-        private static int CalculateDuplicateCount(Dictionary<char, int> charCount)
+        private int CalculateDuplicateCount(Dictionary<char, int> charCount)
         {
             int duplicateCount = 0;
             foreach (KeyValuePair<char, int> entry in charCount)

@@ -3,50 +3,52 @@ using System.Collections.Generic;
 
 namespace Kata
 {
+    // https://www.codewars.com/kata/5870db16056584eab0000006
+    // 5 kyu
     public class Dartboard
     {
-        internal class DistanceRange
+        private class DistanceRange
         {
-            public double MinDistance;
-            public double MaxDistance;
+            private readonly double _minDistance;
+            private readonly double _maxDistance;
 
             public DistanceRange(double min, double max)
             {
-                MaxDistance = max;
-                MinDistance = min;
+                _maxDistance = max;
+                _minDistance = min;
             }
 
             public Boolean IsThisDistance(double distance)
             {
-                return MinDistance <= distance && MaxDistance >= distance;
+                return _minDistance <= distance && _maxDistance >= distance;
             }
         }
 
-        internal class AngleRange
+        private class AngleRange
         {
-            public double MinAngle;
-            public double MaxAngle;
+            private readonly double _minAngle;
+            private readonly double _maxAngle;
 
             public AngleRange(double min, double max)
             {
-                MaxAngle = max;
-                MinAngle = min;
+                _maxAngle = max;
+                _minAngle = min;
             }
 
             public Boolean IsThisRange(double angle)
             {
-                if (MinAngle < MaxAngle)
+                if (_minAngle < _maxAngle)
                 {
-                    return MinAngle < angle && MaxAngle > angle;
+                    return _minAngle < angle && _maxAngle > angle;
                 }
                 else
                 {
-                    return MinAngle < angle || (angle > 0 && angle < MaxAngle);
+                    return _minAngle < angle || (angle > 0 && angle < _maxAngle);
                 }
             }
         }
 
-        private Dictionary<DistanceRange, String> _MagniDistanceDict = new Dictionary<DistanceRange, string>()
+        private readonly Dictionary<DistanceRange, String> _magniDistanceDict = new Dictionary<DistanceRange, string>()
         {
             {new DistanceRange(0, 6.35), "DB"},
             {new DistanceRange(6.35, 15.9), "SB"},
@@ -57,7 +59,7 @@ namespace Kata
             {new DistanceRange(170, Double.MaxValue), "X"},
         };
 
-        private Dictionary<AngleRange, int> _ScoreAngleDict = new Dictionary<AngleRange, int>()
+        private readonly Dictionary<AngleRange, int> _scoreAngleDict = new Dictionary<AngleRange, int>()
         {
             {new AngleRange(351, 9), 6},
             {new AngleRange(9, 27), 13},
@@ -81,19 +83,19 @@ namespace Kata
             {new AngleRange(333, 351), 10},
         };
 
-        private List<String> _FixResultMagni = new List<string>() { "X", "DB", "SB"};
+        private readonly List<String> _fixResultMagni = new List<string>() { "X", "DB", "SB"};
 
         public string GetScore(double x, double y)
         {
             var mangi = GetMagniByPosition(x, y);
-            var score = _FixResultMagni.Contains(mangi) ? "" : GetScoreByPosition(x, y);
+            var score = _fixResultMagni.Contains(mangi) ? "" : GetScoreByPosition(x, y);
             return mangi + score;
         }
 
         private string GetMagniByPosition(double x, double y)
         {
             var distance = GetDistance(x, y);
-            foreach (KeyValuePair<DistanceRange, string> entry in _MagniDistanceDict)
+            foreach (KeyValuePair<DistanceRange, string> entry in _magniDistanceDict)
             {
                 if (entry.Key.IsThisDistance(distance))
                 {
@@ -106,7 +108,7 @@ namespace Kata
         private string GetScoreByPosition(double x, double y)
         {
             var angle = GetAngle(x, y);
-            foreach (KeyValuePair<AngleRange, int> entry in _ScoreAngleDict)
+            foreach (KeyValuePair<AngleRange, int> entry in _scoreAngleDict)
             {
                 if (entry.Key.IsThisRange(angle))
                 {

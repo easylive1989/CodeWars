@@ -10,31 +10,31 @@ namespace KataTests
         [Test]
         public void InputSingleNumber_Should_ReturnItself()
         {
-            Assert.AreEqual("three", StringAverage.AverageString("three"));
+            Assert.AreEqual("three", new StringAverage().AverageString("three"));
         }
 
         [Test]
         public void InputMultipleNumber_Should_ReturnAverageNumber()
         {
-            Assert.AreEqual("four", StringAverage.AverageString("zero nine five two"));
+            Assert.AreEqual("four", new StringAverage().AverageString("zero nine five two"));
         }
 
         [Test]
         public void InputContainsInvalidNumber_ShouldReturnNone()
         {
-            Assert.AreEqual("n/a", StringAverage.AverageString("zero ss five two"));
+            Assert.AreEqual("n/a", new StringAverage().AverageString("zero ss five two"));
         }
 
         [Test]
         public void InputEmpty_ShouldReturnNone()
         {
-            Assert.AreEqual("n/a", StringAverage.AverageString(""));
+            Assert.AreEqual("n/a", new StringAverage().AverageString(""));
         }
 
         [Test]
         public void InputNull_ShouldReturnNone()
         {
-            Assert.AreEqual("n/a", StringAverage.AverageString(null));
+            Assert.AreEqual("n/a", new StringAverage().AverageString(null));
         }
     }
 }

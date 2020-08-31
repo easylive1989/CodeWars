@@ -5,9 +5,11 @@ using System.Text;
 
 namespace Kata
 {
+    // https://www.codewars.com/kata/56c30ad8585d9ab99b000c54
+    // 5 kyu
     public class PlayWithTwoStrings
     {
-        public string workOnStrings(string a, string b)
+        public string WorkOnStrings(string a, string b)
         {
             return String.Concat(a.ToCharArray().Select(c => GetResult(b.ToLower().ToCharArray().GroupBy(i => i).Where(i => i.Key == Convert.ToString(c).ToLower().ToCharArray()[0]).SelectMany(i => i).Count(), c))) +
                    String.Concat(b.ToCharArray().Select(c => GetResult(a.ToLower().ToCharArray().GroupBy(i => i).Where(i => i.Key == Convert.ToString(c).ToLower().ToCharArray()[0]).SelectMany(i => i).Count(), c)));

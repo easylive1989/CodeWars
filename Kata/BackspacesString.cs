@@ -3,6 +3,7 @@ using System.Text;
 namespace Kata
 {
     //https://www.codewars.com/kata/5727bb0fe81185ae62000ae3/train/csharp
+    //6 kyu
     public class BackspacesString
     {
         public string CleanString(string input)

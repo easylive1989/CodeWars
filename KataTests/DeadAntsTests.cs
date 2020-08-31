@@ -8,25 +8,25 @@ namespace KataTests
         [Test]
         public void InputFourLiveAnts_Should_ReturnZeroDeadAnt()
         {
-            Assert.AreEqual(0, DeadAnts.DeadAntCount("ant ant ant ant"));
+            Assert.AreEqual(0, new DeadAnts().DeadAntCount("ant ant ant ant"));
         }
 
         [Test]
         public void InputNull_Should_ReturnZeroDeadAnt()
         {
-            Assert.AreEqual(0, DeadAnts.DeadAntCount(null));
+            Assert.AreEqual(0, new DeadAnts().DeadAntCount(null));
         }
 
         [Test]
         public void InputLiveAntContainsDeadAnt_Should_ReturnCorrectDeadAnt()
         {
-            Assert.AreEqual(2, DeadAnts.DeadAntCount("ant anantt aantnt"));
+            Assert.AreEqual(2, new DeadAnts().DeadAntCount("ant anantt aantnt"));
         }
 
         [Test]
         public void InputAntsWithDot_Should_ReturnCorrectDeadAnt()
         {
-            Assert.AreEqual(1, DeadAnts.DeadAntCount("ant ant .... a nt"));
+            Assert.AreEqual(1, new DeadAnts().DeadAntCount("ant ant .... a nt"));
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Kata
 {
     public class TwoSum
     {
-        public static int[] findTwoSum(int[] nums, int target)
+        public int[] FindTwoSum(int[] nums, int target)
         {
             for(int i = 0; i < nums.Length; i++)
             {
