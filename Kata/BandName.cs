@@ -12,30 +12,23 @@ namespace Kata
             {
                 return "";
             }
-            else
-            {
-                return GenerateBandName(noun);
-            }
+
+            return GenerateBandName(noun);
         }
 
         private string GenerateBandName(string noun)
         {
-            bool isStartSameAsLast = IsStartSameAsLast(noun);
-            if (isStartSameAsLast)
+            if (IsStartSameAsLast(noun))
             {
                 return RepeatNoun(noun);
             }
-            else
-            {
-                return AddTheToNoun(noun);
-            }
+
+            return AddTheToNoun(noun);
         }
 
         private bool IsStartSameAsLast(string noun)
         {
-            char firstWord = noun[0];
-            char lastWord = noun[noun.Length-1];
-            return firstWord == lastWord;
+            return noun[0] == noun[noun.Length-1];
         }
 
         private string RepeatNoun(string noun)
