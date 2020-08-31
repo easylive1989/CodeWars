@@ -23,33 +23,33 @@ namespace Kata
             return ToNumber(digits);
         }
 
-        private bool IsSmallest(List<long> digitArray)
+        private bool IsSmallest(List<long> digits)
         {
-            var smallestDigits = digitArray.OrderBy(i => i);
-            return digitArray.SequenceEqual(smallestDigits);
+            var smallestDigits = digits.OrderBy(i => i);
+            return digits.SequenceEqual(smallestDigits);
         }
 
-        private List<long> FindSmaller(List<long> digitArray)
+        private List<long> FindSmaller(List<long> digits)
         {
-            var smallerDigit = new List<long>();
+            var smallerDigits = new List<long>();
             
-            var firstDigit = digitArray[0];
-            var otherDigits = digitArray.Skip(1).ToList();
+            var firstDigit = digits[0];
+            var otherDigits = digits.Skip(1).ToList();
             if (IsSmallest(otherDigits))
             {
-                var sortedDigits = digitArray.OrderByDescending(i => i).ToList();
-                var secondLargestThanFirst = sortedDigits.First(i => i < firstDigit);
-                sortedDigits.RemoveAt(sortedDigits.IndexOf(secondLargestThanFirst));
+                var sortedDigits = digits.OrderByDescending(i => i).ToList();
+                var secondLargeDigit = sortedDigits.First(i => i < firstDigit);
+                sortedDigits.RemoveAt(sortedDigits.IndexOf(secondLargeDigit));
 
-                smallerDigit.Add(secondLargestThanFirst);
-                smallerDigit.AddRange(sortedDigits);
+                smallerDigits.Add(secondLargeDigit);
+                smallerDigits.AddRange(sortedDigits);
             }
             else
             {
-                smallerDigit.Add(firstDigit);
-                smallerDigit.AddRange(FindSmaller(otherDigits));
+                smallerDigits.Add(firstDigit);
+                smallerDigits.AddRange(FindSmaller(otherDigits));
             }
-            return smallerDigit.ToList();
+            return smallerDigits.ToList();
         }
     
 
