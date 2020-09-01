@@ -9,36 +9,36 @@ namespace Kata
     {
         public int Play(int count, int step)
         {
-            return FindSurvivor(Candidates(count), 0, step);
+            return FindSurvivor(GetCandidates(count), 0, step);
         }
-
-        private static List<int> Candidates(int count)
+        
+        private List<int> GetCandidates(int count)
         {
             return Enumerable.Range(1, count).ToList();
         }
-
-        private static int FindSurvivor(List<int> candidates, int start, int step)
+        
+        private int FindSurvivor(List<int> candidates, int start, int step)
         {
             if (HasSurvivor(candidates))
             {
                 return candidates.First();
             }
             
-            var victim = CalculateVictim(start, step, candidates.Count());
+            var victim = FindVictim(start, step, candidates.Count());
             return FindSurvivor(NextCandidate(candidates, victim), victim, step);
         }
-
-        private static List<int> NextCandidate(List<int> candidates, int victim)
+        
+        private List<int> NextCandidate(List<int> candidates, int victim)
         {
             return candidates.Where((candidate, index) => index != victim).ToList();
         }
-
-        private static int CalculateVictim(int start, int step, int count)
+        
+        private int FindVictim(int start, int step, int count)
         {
             return (start + step - 1) % count;
         }
-
-        private static bool HasSurvivor(List<int> candidates)
+        
+        private bool HasSurvivor(List<int> candidates)
         {
             return candidates.Count() == 1;
         }

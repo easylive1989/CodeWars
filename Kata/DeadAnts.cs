@@ -9,34 +9,23 @@ namespace Kata
     {
         public int DeadAntCount(string ants)
         {
-            if(ants != null)
-            {
-                return FindDeadAntCount(ants);
-            }
-            else
+            if (ants == null)
             {
                 return 0;
             }
-        }
 
-        private int FindDeadAntCount(String ants)
-        {
-            String deadAntsCollections = FindDeadAntsCollections(ants);
-            return CalculateDeadAntCount(deadAntsCollections);
+            return CalculateDeadAntCount(FindDeadAntsCollections(ants));
         }
 
         private string FindDeadAntsCollections(string ants)
         {
-            string pattern = "ant|[^ant]";
-            string replacement = "";
-            Regex rgx = new Regex(pattern);
-            return rgx.Replace(ants, replacement);
+            return new Regex("ant|[^ant]").Replace(ants, "");
         }
 
         private int CalculateDeadAntCount(String deadAntsCollections)
         {
             int antHeadCount = 0, antBodyCount = 0, antLegCount = 0;
-            foreach(char partOfAnt in deadAntsCollections.ToCharArray())
+            foreach(char partOfAnt in deadAntsCollections)
             {
                 if (partOfAnt == 'a')
                     antHeadCount++;

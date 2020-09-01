@@ -15,13 +15,13 @@ namespace Kata
                 return -1;
             } 
 
-            digits = FindSmaller(digits);
+            var smallerDigits = FindSmaller(digits);
 
-            if (digits[0] == 0)
+            if (smallerDigits[0] == 0)
             {
                 return -1;
             }
-            return ToNumber(digits);
+            return ToNumber(smallerDigits);
         }
 
         private bool IsSmallest(List<long> digits)
