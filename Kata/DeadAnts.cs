@@ -9,12 +9,7 @@ namespace Kata
     {
         public int DeadAntCount(string ants)
         {
-            if (ants == null)
-            {
-                return 0;
-            }
-
-            return CalculateDeadAntCount(FindDeadAntsCollections(ants));
+            return ants == null ? 0 : CalculateDeadAntCount(FindDeadAntsCollections(ants));
         }
 
         private string FindDeadAntsCollections(string ants)
@@ -25,7 +20,7 @@ namespace Kata
         private int CalculateDeadAntCount(String deadAntsCollections)
         {
             int antHeadCount = 0, antBodyCount = 0, antLegCount = 0;
-            foreach(char partOfAnt in deadAntsCollections)
+            foreach(var partOfAnt in deadAntsCollections)
             {
                 if (partOfAnt == 'a')
                     antHeadCount++;

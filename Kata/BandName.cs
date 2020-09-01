@@ -8,22 +8,12 @@ namespace Kata
     {
         public string BandNameGenerator(string noun)
         {
-            if(String.IsNullOrEmpty(noun))
-            {
-                return "";
-            }
-
-            return GenerateBandName(noun);
+            return string.IsNullOrEmpty(noun) ? "" : GenerateBandName(noun);
         }
 
         private string GenerateBandName(string noun)
         {
-            if (IsStartSameAsLast(noun))
-            {
-                return RepeatNoun(noun);
-            }
-
-            return AddTheToNoun(noun);
+            return IsStartSameAsLast(noun) ? RepeatNoun(noun) : AddTheToNoun(noun);
         }
 
         private bool IsStartSameAsLast(string noun)
