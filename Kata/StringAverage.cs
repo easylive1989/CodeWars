@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Kata
 {
@@ -6,46 +8,49 @@ namespace Kata
     // 6 kyu
     public class StringAverage
     {
+        private readonly Dictionary<string, int> _numberDict = new Dictionary<string, int>()
+        {
+            {"zero", 0},
+            {"one", 1},
+            {"two", 2},
+            {"three", 3},
+            {"four", 4},
+            {"five", 5},
+            {"six", 6},
+            {"seven", 7},
+            {"eight", 8},
+            {"nine", 9}
+        };
 
-        private const int INVALID_NUMBER = -1;
-        private const string INVALID_STRING_NUMBER = "n/a";
+        private const int InvalidNumber = -1;
+        private const string InvalidStringNumber = "n/a";
 
         public string AverageString(string str)
         {
-            if (str != null)
+            if (str == null)
             {
-                return DoAveragString(str);
+                return InvalidStringNumber;
             }
-            else
-            {
-                return INVALID_STRING_NUMBER;
-            }
+
+            return DoAverageString(str);
         }
 
-        private string DoAveragString(string str)
+        private string DoAverageString(string str)
         {
-            string[] strNums = ToStringNumbers(str);
-            int[] nums = ToNumbers(strNums);
-            if (!ContainsInvalidNumber(nums))
+            var nums = ToNumbers(str);
+            if (HasInvalidNumber(nums))
             {
-                int AverageNumber = CalculateAverage(nums);
-                string AverageStrNumber = ToString(AverageNumber);
-                return AverageStrNumber;
+                return InvalidStringNumber;
             }
-            else
-            {
-                return INVALID_STRING_NUMBER;
-            }
+
+            var averageNumber = CalculateAverage(nums);
+            return ToString(averageNumber);
         }
 
-        private string[] ToStringNumbers(string str)
+        private int[] ToNumbers(string str)
         {
-            return str.Split(' ');
-        }
-
-        private int[] ToNumbers(string[] strNumbers)
-        {
-            int[] numbers = new int[strNumbers.Length];
+            var strNumbers = str.Split(' ');
+            var numbers = new int[strNumbers.Length];
             for (int i = 0; i < strNumbers.Length; i++)
             {
                 numbers[i] = ToNumber(strNumbers[i]);
@@ -53,11 +58,11 @@ namespace Kata
             return numbers;
         }
 
-        private Boolean ContainsInvalidNumber(int[] numbers)
+        private Boolean HasInvalidNumber(int[] numbers)
         {
-            foreach (int number in numbers)
+            foreach (var number in numbers)
             {
-                if (number.Equals(INVALID_NUMBER))
+                if (number.Equals(InvalidNumber))
                     return true;
             }
             return false;
@@ -65,8 +70,8 @@ namespace Kata
 
         private int CalculateAverage(int[] numbers)
         {
-            int sum = 0;
-            foreach (int number in numbers)
+            var sum = 0;
+            foreach (var number in numbers)
             {
                 sum += number;
             }
@@ -75,98 +80,14 @@ namespace Kata
 
         private int ToNumber(string strNumber)
         {
-            if (strNumber.Equals("zero"))
-            {
-                return 0;
-            }
-            else if (strNumber.Equals("one"))
-            {
-                return 1;
-            }
-            else if (strNumber.Equals("two"))
-            {
-                return 2;
-            }
-            else if (strNumber.Equals("three"))
-            {
-                return 3;
-            }
-            else if (strNumber.Equals("four"))
-            {
-                return 4;
-            }
-            else if (strNumber.Equals("five"))
-            {
-                return 5;
-            }
-            else if (strNumber.Equals("six"))
-            {
-                return 6;
-            }
-            else if (strNumber.Equals("seven"))
-            {
-                return 7;
-            }
-            else if (strNumber.Equals("eight"))
-            {
-                return 8;
-            }
-            else if (strNumber.Equals("nine"))
-            {
-                return 9;
-            }
-            else
-            {
-                return INVALID_NUMBER;
-            }
+            return _numberDict.ContainsKey(strNumber) ? _numberDict[strNumber] : InvalidNumber;
         }
 
         private String ToString(int number)
         {
-            if (number == 0)
-            {
-                return "zero";
-            }
-            else if (number == 1)
-            {
-                return "one";
-            }
-            else if (number == 2)
-            {
-                return "two";
-            }
-            else if (number == 3)
-            {
-                return "three";
-            }
-            else if (number == 4)
-            {
-                return "four";
-            }
-            else if (number == 5)
-            {
-                return "five";
-            }
-            else if (number == 6)
-            {
-                return "six";
-            }
-            else if (number == 7)
-            {
-                return "seven";
-            }
-            else if (number == 8)
-            {
-                return "eight";
-            }
-            else if (number == 9)
-            {
-                return "nine";
-            }
-            else
-            {
-                return INVALID_STRING_NUMBER;
-            }
+            return _numberDict.ContainsValue(number)
+                ? _numberDict.First(x => x.Value == number).Key
+                : InvalidStringNumber;
         }
     }
 }
