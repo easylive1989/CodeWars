@@ -22,5 +22,28 @@ namespace KataTests
         {
             Assert.AreEqual(expected, new MyString().RemoveDuplicatedWord(sentence));
         }
+
+        [Test]
+        public void Reverse_One_Character()
+        {
+            ReverseTextShouldBe("a", "a");
+        }
+        
+        [Test]
+        public void Reverse_One_Word()
+        {
+            ReverseTextShouldBe("cba", "abc");
+        }
+
+        [Test]
+        public void Reverse_Two_Word()
+        {
+            ReverseTextShouldBe("cbafed", "abc def");
+        }
+
+        private static void ReverseTextShouldBe(string expected, string text)
+        {
+            Assert.AreEqual(expected, new MyString().ReverseAndCombineText(text));
+        }
     }
 }
