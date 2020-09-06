@@ -25,19 +25,19 @@ namespace Kata
         private const int InvalidNumber = -1;
         private const string InvalidStringNumber = "n/a";
 
-        public string AverageString(string str)
+        public string AverageString(string stringNumbers)
         {
-            if (str == null)
+            if (stringNumbers == null)
             {
                 return InvalidStringNumber;
             }
 
-            return DoAverageString(str);
+            return DoAverageString(stringNumbers);
         }
 
-        private string DoAverageString(string str)
+        private string DoAverageString(string stringNumbers)
         {
-            var nums = ToNumbers(str);
+            var nums = ToNumbers(stringNumbers);
             if (HasInvalidNumber(nums))
             {
                 return InvalidStringNumber;
