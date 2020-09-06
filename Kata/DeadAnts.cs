@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Kata
@@ -8,19 +7,17 @@ namespace Kata
     // 6 kyu
     public class DeadAnts
     {
-        public int DeadAntCount(string ants)
+        public int Count(string ants)
         {
             if (string.IsNullOrEmpty(ants))
             {
                 return 0;
             }
-            else
-            {
-                return CalculateDeadAntCount(FindDeadAntsCollections(ants));
-            }
+
+            return CalculateDeadAntCount(FindDeadAnts(FindDeadAnts(ants)));
         }
 
-        private string FindDeadAntsCollections(string ants)
+        private string FindDeadAnts(string ants)
         {
             return new Regex("ant|[^ant]").Replace(ants, "");
         }
@@ -31,11 +28,8 @@ namespace Kata
             {
                 return 0;
             }
-            else
-            {
-                return deadAntsCollections.GroupBy(x => x).Max(x => x.Count());
-            }
-        }
 
+            return deadAntsCollections.GroupBy(x => x).Max(x => x.Count());
+        }
     }
 }
