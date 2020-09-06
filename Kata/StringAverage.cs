@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Kata
@@ -27,55 +26,28 @@ namespace Kata
 
         public string AverageString(string stringNumbers)
         {
-            if (stringNumbers == null)
-            {
-                return InvalidStringNumber;
-            }
-
-            return DoAverageString(stringNumbers);
-        }
-
-        private string DoAverageString(string stringNumbers)
-        {
             var nums = ToNumbers(stringNumbers);
             if (HasInvalidNumber(nums))
             {
                 return InvalidStringNumber;
             }
 
-            var averageNumber = CalculateAverage(nums);
-            return ToString(averageNumber);
+            return ToString(CalculateAverage(nums));
         }
-
+        
         private int[] ToNumbers(string str)
         {
-            var strNumbers = str.Split(' ');
-            var numbers = new int[strNumbers.Length];
-            for (int i = 0; i < strNumbers.Length; i++)
-            {
-                numbers[i] = ToNumber(strNumbers[i]);
-            }
-            return numbers;
+            return str.Split(' ').Select(x => ToNumber(x)).ToArray();
         }
 
-        private Boolean HasInvalidNumber(int[] numbers)
+        private bool HasInvalidNumber(int[] numbers)
         {
-            foreach (var number in numbers)
-            {
-                if (number.Equals(InvalidNumber))
-                    return true;
-            }
-            return false;
+            return numbers.Count(x => x == InvalidNumber) != 0;
         }
 
         private int CalculateAverage(int[] numbers)
         {
-            var sum = 0;
-            foreach (var number in numbers)
-            {
-                sum += number;
-            }
-            return sum / numbers.Length;
+            return numbers.Sum() / numbers.Length;
         }
 
         private int ToNumber(string strNumber)
@@ -83,7 +55,7 @@ namespace Kata
             return _numberDict.ContainsKey(strNumber) ? _numberDict[strNumber] : InvalidNumber;
         }
 
-        private String ToString(int number)
+        private string ToString(int number)
         {
             return _numberDict.ContainsValue(number)
                 ? _numberDict.First(x => x.Value == number).Key

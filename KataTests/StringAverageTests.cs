@@ -30,11 +30,5 @@ namespace KataTests
         {
             Assert.AreEqual("n/a", new StringAverage().AverageString(""));
         }
-
-        [Test]
-        public void InputNull_ShouldReturnNone()
-        {
-            Assert.AreEqual("n/a", new StringAverage().AverageString(null));
-        }
     }
 }
