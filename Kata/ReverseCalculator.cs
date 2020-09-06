@@ -12,25 +12,22 @@ namespace Kata
         {
             var operatorDict = new Dictionary<string, Func<double, double, double>>()
             {
-                {"+", (operator1, operator2) => operator1 + operator2 },
-                {"-", (operator1, operator2) => operator1 - operator2 },
-                {"*", (operator1, operator2) => operator1 * operator2 },
-                {"/", (operator1, operator2) => operator1 / operator2 },
+                {"+", (operator2, operator1) => operator1 + operator2 },
+                {"-", (operator2, operator1) => operator1 - operator2 },
+                {"*", (operator2, operator1) => operator1 * operator2 },
+                {"/", (operator2, operator1) => operator1 / operator2 },
             };
 
-            var operands = new List<double>();
+            var operands = new Stack<double>();
             foreach (var expression in expressions.Split(' '))
             {
                 if (operatorDict.ContainsKey(expression))
                 {
-                    var tmp = operatorDict[expression](operands[operands.Count - 2], operands[operands.Count - 1]);
-                    operands.RemoveAt(operands.Count - 2);
-                    operands.RemoveAt(operands.Count - 1);
-                    operands.Add(tmp);
+                    operands.Push(operatorDict[expression](operands.Pop(), operands.Pop()));
                 }
                 else
                 {
-                    operands.Add(Double.Parse(expression));
+                    operands.Push(double.Parse(expression));
                 }
             }
     

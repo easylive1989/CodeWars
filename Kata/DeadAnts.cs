@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Kata
@@ -9,7 +10,14 @@ namespace Kata
     {
         public int DeadAntCount(string ants)
         {
-            return ants == null ? 0 : CalculateDeadAntCount(FindDeadAntsCollections(ants));
+            if (string.IsNullOrEmpty(ants))
+            {
+                return 0;
+            }
+            else
+            {
+                return CalculateDeadAntCount(FindDeadAntsCollections(ants));
+            }
         }
 
         private string FindDeadAntsCollections(string ants)
@@ -17,20 +25,16 @@ namespace Kata
             return new Regex("ant|[^ant]").Replace(ants, "");
         }
 
-        private int CalculateDeadAntCount(String deadAntsCollections)
+        private int CalculateDeadAntCount(string deadAntsCollections)
         {
-            int antHeadCount = 0, antBodyCount = 0, antLegCount = 0;
-            foreach(var partOfAnt in deadAntsCollections)
+            if (string.IsNullOrEmpty(deadAntsCollections))
             {
-                if (partOfAnt == 'a')
-                    antHeadCount++;
-                else if (partOfAnt == 'n')
-                    antBodyCount++;
-                else if (partOfAnt == 't')
-                    antLegCount++;
-            
+                return 0;
             }
-            return Math.Max(antHeadCount, Math.Max(antBodyCount, antLegCount));
+            else
+            {
+                return deadAntsCollections.GroupBy(x => x).Max(x => x.Count());
+            }
         }
 
     }
