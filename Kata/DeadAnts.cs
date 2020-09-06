@@ -14,7 +14,7 @@ namespace Kata
                 return 0;
             }
 
-            return CalculateDeadAntCount(FindDeadAnts(FindDeadAnts(ants)));
+            return CalculateDeadAntCount(FindDeadAnts(ants));
         }
 
         private string FindDeadAnts(string ants)
