@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Kata;
 using NUnit.Framework;
 
@@ -27,6 +28,13 @@ namespace KataTests
         private static void DistinctNumbersShouldBe(int[] expected, int[] numbers)
         {
             Assert.AreEqual(expected, new MyNumbers().RemoveDuplicated(numbers));
+        }
+
+        [Test]
+        public void SumConsecutives()
+        {
+            CollectionAssert.AreEqual(new List<int>{1,12,0,4,6,1}, 
+                new MyNumbers().SumConsecutives(new List<int>{1,4,4,4,0,4,3,3,1}));
         }
     }
 }
