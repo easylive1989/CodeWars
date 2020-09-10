@@ -9,13 +9,21 @@ namespace Kata
     {
         public string[] Escape(int[,] carpark)
         {
+            if (carpark[carpark.GetLength(0) - 1, carpark.GetLength(1) - 1] == 2)
+            {
+                return new string[0];
+            }
             var result = new List<string>();
 
-            Point nextStart = FindStart(carpark);
+            var nextStart = FindStart(carpark);
 
             nextStart = FindWayToLastLevel(carpark, nextStart, result);
-            
-            result.Add(CalculateToExit(carpark, nextStart.Position));
+
+            var calculateToExit = CalculateToExit(carpark, nextStart.Position);
+            if (calculateToExit != null)
+            {
+                result.Add(calculateToExit);
+            }
             
             return result.ToArray();
         }
@@ -23,7 +31,7 @@ namespace Kata
         private Point FindWayToLastLevel(int[,] carpark, Point nextStart, List<string> result)
         {
             var lastStair = nextStart.Position;
-            for (int level = nextStart.Level; level < carpark.GetLength(0) - 1; level++)
+            for (int level = nextStart.Level; level < carpark.GetLength(0) - 1;)
             {
                 var stairIdx = -1;
                 for (int i = 0; i < carpark.GetLength(1); i++)
@@ -33,10 +41,22 @@ namespace Kata
                         stairIdx = i;
                     }
                 }
-
+                
+                
                 var stepToStair = (stairIdx > lastStair ? "R" : "L") + Math.Abs(stairIdx - lastStair);
-                lastStair = stairIdx;
                 result.Add(stepToStair);
+                lastStair = stairIdx;
+                
+                
+                for (var stairlevel = level; stairlevel < carpark.GetLength(1); stairlevel++)
+                {
+                    if (carpark[stairlevel, stairIdx] != 1)
+                    {
+                        result.Add("D" + (stairlevel - level));
+                        level += (stairlevel - level);
+                        break;
+                    }
+                }
             }
             return new Point()
             {
@@ -47,7 +67,7 @@ namespace Kata
 
         private Point FindStart(int[,] carpark)
         {
-            Point nextStart = new Point();
+            var nextStart = new Point();
             for (int level = 0; level < carpark.GetLength(0) - 1; level++)
             {
                 var startIdx = FindStart(carpark, level);
@@ -85,7 +105,12 @@ namespace Kata
         private string CalculateToExit(int[,] carpark, int startIdx)
         {
             var stepCount = carpark.GetLength(1) - 1 - startIdx;
-            return "R" + stepCount;
+            if (stepCount != 0)
+            {
+                return "R" + stepCount;
+            }
+
+            return null;
         }
     }
 
