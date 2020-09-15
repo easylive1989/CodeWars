@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,6 +32,36 @@ namespace Kata
         {
             return numbers.Skip(index)
                 .TakeWhile(number => number == numbers[index]).ToList();
+        }
+
+        public int EvenSum(List<int> numbers)
+        {
+            UpdateEvenNumber(_evenNumbers);
+            if (!HasEvenNumber(numbers))
+            {
+                return 0;
+            }
+            return _evenNumbers.Sum();
+        }
+        
+        
+        private readonly List<int> _evenNumbers = new List<int>();
+        
+
+        private void UpdateEvenNumber(List<int> numbers)
+        {
+            foreach (var number in numbers)
+            {
+                if (number % 2 == 0)
+                {
+                    _evenNumbers.Add(number);
+                }
+            }
+        }
+        
+        private bool HasEvenNumber(List<int> numbers)
+        {
+            return _evenNumbers.Any(number => true);
         }
     }
 }
