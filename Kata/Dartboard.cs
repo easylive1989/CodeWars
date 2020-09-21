@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Kata.Models;
 
 namespace Kata
 {
@@ -85,48 +87,23 @@ namespace Kata
 
         private readonly List<String> _fixResultMagni = new List<string>() { "X", "DB", "SB"};
 
-        public string GetScore(double x, double y)
+        public string GetScore(Point point)
         {
-            var mangi = GetMagniByPosition(x, y);
-            var score = _fixResultMagni.Contains(mangi) ? "" : GetScoreByPosition(x, y);
+            var mangi = GetMagniByPosition(point);
+            var score = _fixResultMagni.Contains(mangi) ? "" : GetScoreByPosition(point);
             return mangi + score;
         }
 
-        private string GetMagniByPosition(double x, double y)
+        private string GetMagniByPosition(Point point)
         {
-            var distance = GetDistance(x, y);
-            foreach (KeyValuePair<DistanceRange, string> entry in _magniDistanceDict)
-            {
-                if (entry.Key.IsThisDistance(distance))
-                {
-                    return entry.Value;
-                }
-            }
-            return "";
+            var distance = point.GetDistance();
+            return _magniDistanceDict.FirstOrDefault(entry => entry.Key.IsThisDistance(distance)).Value;
         }
 
-        private string GetScoreByPosition(double x, double y)
+        private string GetScoreByPosition(Point point)
         {
-            var angle = GetAngle(x, y);
-            foreach (KeyValuePair<AngleRange, int> entry in _scoreAngleDict)
-            {
-                if (entry.Key.IsThisRange(angle))
-                {
-                    return Convert.ToString(entry.Value);
-                }
-            }
-            return "";
-        }
-
-        private double GetDistance(double x, double y)
-        {
-            return Math.Sqrt(x * x + y * y);
-        }
-
-        private double GetAngle(double x, double y)
-        {
-            var result = Math.Atan2(y, x) * 180.0 / Math.PI;
-            return result > 0 ? result : 360 + result;
+            var angle = point.GetAngle();
+            return Convert.ToString(_scoreAngleDict.FirstOrDefault(entry => entry.Key.IsThisRange(angle)).Value);
         }
     }
 }

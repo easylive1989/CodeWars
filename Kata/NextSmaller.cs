@@ -32,10 +32,10 @@ namespace Kata
 
         private List<long> FindSmaller(List<long> digits)
         {
-            var smallerDigits = new List<long>();
-            
             var firstDigit = digits[0];
             var otherDigits = digits.Skip(1).ToList();
+            
+            var smallerDigits = new List<long>();
             if (IsSmallest(otherDigits))
             {
                 var sortedDigits = digits.OrderByDescending(i => i).ToList();

@@ -71,12 +71,12 @@ namespace Kata
             };
         }
 
-        private CarpakPoint FindStart(int[,] carpark)
+        private CarpakPoint FindStart(int[,] carPark)
         {
             var nextStart = new CarpakPoint();
             for (int level = 0; level < _carParkLevel - 1; level++)
             {
-                var startIdx = FindStart(carpark, level);
+                var startIdx = FindStart(carPark, level);
                 if (startIdx == -1)
                 {
                     continue;
@@ -94,12 +94,12 @@ namespace Kata
         }
 
 
-        private int FindStart(int[,] carpark, int level)
+        private int FindStart(int[,] carPark, int level)
         {
             int startIdx = -1;
             for (int i = 0; i < _carParkWidth; i++)
             {
-                if (carpark[level, i] == 2)
+                if (carPark[level, i] == 2)
                 {
                     startIdx = i;
                 }
